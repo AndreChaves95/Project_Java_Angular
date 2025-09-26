@@ -21,7 +21,7 @@ public class Shipment {
     @Id
     private Long id;
 
-    private String reference;
+    private String shipmentNumber;
 
     @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
     private List<Income> incomes = new ArrayList<>();
@@ -30,5 +30,5 @@ public class Shipment {
     private List<Cost> costs = new ArrayList<>();
 
     @OneToOne(mappedBy = "shipment", cascade = CascadeType.ALL)
-    private Profit profit;
+    private Profit totalProfit;
 }
