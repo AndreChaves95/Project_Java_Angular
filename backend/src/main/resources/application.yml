@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:backendprofitdb
+    url: jdbc:h2:mem:backenddb
     driverClassName: org.h2.Driver
-    username: sa
-    password:
+    username: andre
+    password: andre
   h2:
     console:
       enabled: true
