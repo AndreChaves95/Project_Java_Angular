@@ -1,6 +1,5 @@
 package com.project.backend.service.implementation;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.project.backend.dto.ProfitDto;
@@ -39,21 +38,20 @@ public class ProfitServiceImpl implements IProfitService {
         Shipment shipment = shipmentRepository.findShipmentById(shipmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Shipment", shipmentId));
 
-        var cost = costRepository.findByShipmentId(shipmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cost", shipmentId));
-        var income = incomeRepository.findByShipmentId(shipmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Income", shipmentId));
-
-        BigDecimal profitValue = income.subtract(cost);
-        Profit profit = new Profit();
-        profit.setShipment(shipment);
+        var cost = costRepository.sumCostByShipmentId(shipmentId);
+        var income = incomeRepository.sumIncomeByShipmentId(shipmentId);
+        var profitValue = income.subtract(cost);
+        // check if exists
+        Profit profit = profitRepository.findByShipmentId(shipmentId);
+        if (profit == null) {
+            profit = new Profit();
+            profit.setShipment(shipment);
+        }
         profit.setTotalCost(cost);
         profit.setTotalIncome(income);
         profit.setProfitValue(profitValue);
-        // Need to validate if already exists on database (data.sql)
-        if (!profitRepository.existsById(shipmentId)) {
-            profit = profitRepository.save(profit);
-        }
+        profitRepository.save(profit);
+
         return ProfitMapper.mapToDto(profit);
     }
 

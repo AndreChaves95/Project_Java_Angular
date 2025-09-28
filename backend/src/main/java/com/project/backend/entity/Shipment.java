@@ -1,6 +1,5 @@
 package com.project.backend.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,10 +23,10 @@ public class Shipment {
     private String shipmentNumber;
 
     @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
-    private List<Income> incomes = new ArrayList<>();
+    private List<Income> incomes;
 
     @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
-    private List<Cost> costs = new ArrayList<>();
+    private List<Cost> costs;
 
     @OneToOne(mappedBy = "shipment", cascade = CascadeType.ALL)
     private Profit totalProfit;
