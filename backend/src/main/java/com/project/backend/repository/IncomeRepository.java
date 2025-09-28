@@ -1,6 +1,7 @@
 package com.project.backend.repository;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 import com.project.backend.entity.Income;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,5 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
      * @param shipmentId ID of the shipment
      * @return income record associated with the specified shipment ID or null if not found
      */
-    List<Income> findByShipmentId(Long shipmentId);
+    Optional<BigDecimal> findByShipmentId(Long shipmentId);
 }

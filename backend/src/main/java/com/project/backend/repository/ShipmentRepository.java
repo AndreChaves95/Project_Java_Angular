@@ -1,5 +1,7 @@
 package com.project.backend.repository;
 
+import java.util.Optional;
+
 import com.project.backend.entity.Shipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,5 +13,5 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
      * @param shipmentId ID of the shipment
      * @return shipment with the specified ID or null if not found
      */
-    Shipment findShipmentById(Long shipmentId);
+    Optional<Shipment> findShipmentById(Long shipmentId);
 }
