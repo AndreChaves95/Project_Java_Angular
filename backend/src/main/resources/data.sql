@@ -16,8 +16,3 @@ INSERT INTO income (shipment_id, amount, description) VALUES
 (2, 7000, 'Laptops'),
 (3, 2500, 'Tables'),
 (3, 1000, 'Chairs');
-
-INSERT INTO profit (shipment_id, total_income, total_cost, profit_value) VALUES
-(1, 50000, 33500, 16500),
-(2, 7000, 7500, -500),
-(3, 3500, 2800, 700);

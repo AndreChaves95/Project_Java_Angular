@@ -10,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 public interface CostRepository extends JpaRepository<Cost, Long> {
 
     /**
-     * Finds a cost record by shipment ID.
+     * Finds the total cost associated with a specific shipment.
      *
      * @param shipmentId ID of the shipment
-     * @return cost record associated with the specified shipment ID or null if not found
+     * @return the cost record associated with the shipment
      */
     @Query("SELECT COALESCE(SUM(c.amount), 0) FROM Cost c WHERE c.shipment.id = :shipmentId")
     BigDecimal sumCostByShipmentId(@Param("shipmentId") Long shipmentId);
