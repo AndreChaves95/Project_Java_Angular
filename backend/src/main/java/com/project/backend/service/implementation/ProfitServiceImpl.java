@@ -64,17 +64,18 @@ public class ProfitServiceImpl implements IProfitService {
             throw new ResourceNotFoundException("Shipments");
         }
 
+        BigDecimal totalShipmentCost = shipments.stream()
+                .map(s -> costRepository.sumCostByShipmentId(s.getId()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalShipmentIncome = shipments.stream()
+                .map(s -> incomeRepository.sumIncomeByShipmentId(s.getId()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         ProfitDto totalProfitDto = new ProfitDto();
-        BigDecimal shipmentCost = BigDecimal.ZERO;
-        BigDecimal shipmentIncome = BigDecimal.ZERO;
-        for (Shipment shipment : shipments) {
-            shipmentCost = shipmentCost.add(costRepository.sumCostByShipmentId(shipment.getId()));
-            shipmentIncome = shipmentIncome.add(incomeRepository.sumIncomeByShipmentId(shipment.getId()));
-        }
         totalProfitDto.setShipmentId(new Random().nextLong(1, Long.MAX_VALUE));
-        totalProfitDto.setTotalCost(shipmentCost);
-        totalProfitDto.setTotalIncome(shipmentIncome);
-        totalProfitDto.setProfitValue(shipmentIncome.subtract(shipmentCost));
+        totalProfitDto.setTotalCost(totalShipmentCost);
+        totalProfitDto.setTotalIncome(totalShipmentIncome);
+        totalProfitDto.setProfitValue(totalShipmentIncome.subtract(totalShipmentCost));
 
         return totalProfitDto;
     }

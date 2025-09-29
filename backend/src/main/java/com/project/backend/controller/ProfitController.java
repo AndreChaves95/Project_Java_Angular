@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/profit")
+@RequestMapping("/api/profits")
 public class ProfitController {
 
     private final IProfitService profitService;
