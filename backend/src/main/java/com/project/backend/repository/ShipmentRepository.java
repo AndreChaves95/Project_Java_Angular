@@ -1,5 +1,6 @@
 package com.project.backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.project.backend.entity.Shipment;
@@ -14,4 +15,11 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
      * @return shipment with the specified ID or null if not found
      */
     Optional<Shipment> findShipmentById(Long shipmentId);
+
+    /**
+     * Finds all shipments.
+     *
+     * @return list of shipments
+     */
+    List<Shipment> findAll();
 }

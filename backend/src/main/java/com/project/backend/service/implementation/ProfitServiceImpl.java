@@ -1,6 +1,8 @@
 package com.project.backend.service.implementation;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 
 import com.project.backend.dto.ProfitDto;
 import com.project.backend.entity.Profit;
@@ -56,7 +58,24 @@ public class ProfitServiceImpl implements IProfitService {
     }
 
     @Override
-    public List<ProfitDto> calculateTotalProfits(List<Long> shipmentIds) {
-        return List.of();
+    public ProfitDto calculateTotalProfits() {
+        List<Shipment> shipments = shipmentRepository.findAll();
+        if (shipments.isEmpty()) {
+            throw new ResourceNotFoundException("Shipments");
+        }
+
+        ProfitDto totalProfitDto = new ProfitDto();
+        BigDecimal shipmentCost = BigDecimal.ZERO;
+        BigDecimal shipmentIncome = BigDecimal.ZERO;
+        for (Shipment shipment : shipments) {
+            shipmentCost = shipmentCost.add(costRepository.sumCostByShipmentId(shipment.getId()));
+            shipmentIncome = shipmentIncome.add(incomeRepository.sumIncomeByShipmentId(shipment.getId()));
+        }
+        totalProfitDto.setShipmentId(new Random().nextLong(1, Long.MAX_VALUE));
+        totalProfitDto.setTotalCost(shipmentCost);
+        totalProfitDto.setTotalIncome(shipmentIncome);
+        totalProfitDto.setProfitValue(shipmentIncome.subtract(shipmentCost));
+
+        return totalProfitDto;
     }
 }

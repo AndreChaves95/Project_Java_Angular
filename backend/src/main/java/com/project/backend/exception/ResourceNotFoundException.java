@@ -9,4 +9,8 @@ public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String objectMissing, Long id) {
         super(String.format("%s not found with id: '%s'", objectMissing, id));
     }
+
+    public ResourceNotFoundException(String objectMissing) {
+        super(String.format("No %s found!", objectMissing));
+    }
 }

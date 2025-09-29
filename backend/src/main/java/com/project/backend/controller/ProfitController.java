@@ -30,8 +30,8 @@ public class ProfitController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ProfitDto>> calculateTotalProfits() {
-        return ResponseEntity.ok(profitService.calculateTotalProfits(null));
+    public ResponseEntity<ProfitDto> calculateTotalProfits() {
+        return ResponseEntity.ok(profitService.calculateTotalProfits());
     }
 
     @PostMapping("/create")

@@ -8,5 +8,5 @@ public interface IProfitService {
 
     public ProfitDto calculateProfitByShipmentId(Long shipmentId);
     
-    public List<ProfitDto> calculateTotalProfits(List<Long> shipmentIds);
+    public ProfitDto calculateTotalProfits();
 }
