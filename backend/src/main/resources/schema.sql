@@ -1,9 +1,9 @@
-CREATE TABLE shipment (
+CREATE TABLE IF NOT EXISTS shipment (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     shipment_number VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE cost (
+CREATE TABLE IF NOT EXISTS cost (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     shipment_id BIGINT NOT NULL,
     amount DECIMAL(10,2),
@@ -11,7 +11,7 @@ CREATE TABLE cost (
     FOREIGN KEY (shipment_id) REFERENCES shipment(id)
 );
 
-CREATE TABLE income (
+CREATE TABLE IF NOT EXISTS income (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     shipment_id BIGINT NOT NULL,
     amount DECIMAL(10,2),
@@ -19,7 +19,7 @@ CREATE TABLE income (
     FOREIGN KEY (shipment_id) REFERENCES shipment(id)
 );
 
-CREATE TABLE profit (
+CREATE TABLE IF NOT EXISTS profit (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     shipment_id BIGINT NOT NULL,
     total_income DECIMAL(10,2),
