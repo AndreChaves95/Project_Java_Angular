@@ -1,7 +1,5 @@
 package com.project.backend.controller;
 
-import java.util.List;
-
 import com.project.backend.dto.ProfitDto;
 import com.project.backend.dto.ShipmentDto;
 import com.project.backend.service.IProfitService;
