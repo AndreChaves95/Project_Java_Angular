@@ -101,20 +101,4 @@ class ProfitServiceUnitTests {
         assertThrows(ResourceNotFoundException.class,
                 () -> profitService.calculateTotalProfits());
     }
-
-    /*@Test
-    void createShipment_shouldPersistAndReturnDto() {
-        ShipmentDto dto = new ShipmentDto(null, "Test Shipment");
-        Shipment saved = new Shipment();
-        saved.setId(10L);
-        saved.setDescription("Test Shipment");
-
-        when(shipmentRepository.save(any(Shipment.class))).thenReturn(saved);
-
-        ShipmentDto result = profitService.createShipment(dto);
-
-        assertNotNull(result.getId());
-        assertEquals("Test Shipment", result.getDescription());
-        verify(shipmentRepository).save(any(Shipment.class));
-    }*/
 }

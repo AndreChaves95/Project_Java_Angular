@@ -1,8 +1,8 @@
 -- Clear existing data to prevent primary key violations
-DELETE FROM shipment;
+DELETE FROM profit;
 DELETE FROM cost;
 DELETE FROM income;
-DELETE FROM profit;
+DELETE FROM shipment;
 
 -- Reset auto-increment sequences
 ALTER TABLE shipment ALTER COLUMN id RESTART WITH 1;
