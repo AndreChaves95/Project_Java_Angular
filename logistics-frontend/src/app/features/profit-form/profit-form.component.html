@@ -8,18 +8,18 @@
       </div>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
-      {{ loading ? 'Loading...' : 'Calculate Profit' }}
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      {{ 'Calculate Shipment Profit' }}
     </button>
   </form>
 
   <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
 
-  <div *ngIf="result" class="mt-3">
-    <h5>Result</h5>
-    <p><strong>Shipment:</strong> {{ result.shipmentId }}</p>
-    <p><strong>Total Income:</strong> {{ result.totalIncome | number:'1.2-2' }}</p>
-    <p><strong>Total Cost:</strong> {{ result.totalCost | number:'1.2-2' }}</p>
-    <p><strong>Profit:</strong> {{ result.profitValue | number:'1.2-2' }}</p>
+  <div *ngIf="profit" class="mt-3">
+    <h4>Profit of Shipment {{ profit.shipmentId }}</h4>
+    <p><strong>Shipment Number:</strong> {{ profit.shipmentNumber }}</p>
+    <p><strong>Shipment Income:</strong> {{ profit.totalIncome | number:'1.2-2' }}</p>
+    <p><strong>Shipment Cost:</strong> {{ profit.totalCost | number:'1.2-2' }}</p>
+    <p><strong>Shipment Profit:</strong> {{ profit.profitValue | number:'1.2-2' }}</p>
   </div>
 </mat-card>

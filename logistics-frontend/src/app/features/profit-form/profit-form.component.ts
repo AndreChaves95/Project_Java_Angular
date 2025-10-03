@@ -28,8 +28,7 @@ export class ProfitFormComponent {
     shipmentId: [null, [Validators.required, Validators.min(1)]]
   });
 
-  result?: ProfitDto;
-  loading = false;
+  profit?: ProfitDto;
   error?: string;
 
   constructor(private fb: FormBuilder, private profitService: ProfitService) {}
@@ -37,13 +36,11 @@ export class ProfitFormComponent {
   submit() {
     if (this.form.invalid) return;
 
-    this.loading = true;
     this.error = undefined;
-
     const id = this.form.value.shipmentId!;
     this.profitService.getProfitByShipmentId(id).subscribe({
-      next: (dto: any) => { this.result = dto; this.loading = false; },
-      error: (err: { error: any; message: any; }) => { this.error = err?.error || err?.message; this.loading = false; }
+      next: (dto: any) => { this.profit = dto; },
+      error: (err: { error: any; message: any; }) => { this.error = err?.error || err?.message; }
     });
   }
 }
