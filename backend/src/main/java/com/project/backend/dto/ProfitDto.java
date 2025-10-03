@@ -13,6 +13,8 @@ public class ProfitDto {
 
     private Long shipmentId;
 
+    private String shipmentNumber;
+
     private BigDecimal totalCost;
 
     private BigDecimal totalIncome;

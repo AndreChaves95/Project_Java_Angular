@@ -26,6 +26,8 @@ public class Profit {
     @JoinColumn(name = "shipment_id", nullable = false)
     private Shipment shipment;
 
+    private String shipmentNumber;
+
     private BigDecimal totalCost;
 
     private BigDecimal totalIncome;

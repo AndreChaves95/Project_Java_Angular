@@ -12,6 +12,7 @@ public class ProfitMapper {
 
        return new ProfitDto(
                profit.getShipment().getId(),
+               profit.getShipment().getShipmentNumber(),
                profit.getTotalCost(),
                profit.getTotalIncome(),
                profit.getProfitValue());

@@ -43,12 +43,13 @@ public class ProfitServiceImpl implements IProfitService {
         var cost = costRepository.sumCostByShipmentId(shipmentId);
         var income = incomeRepository.sumIncomeByShipmentId(shipmentId);
         var profitValue = income.subtract(cost);
-        // check if exists
+        // check if already exists on database
         Profit profit = profitRepository.findByShipmentId(shipmentId);
         if (profit == null) {
             profit = new Profit();
             profit.setShipment(shipment);
         }
+        profit.setShipmentNumber(shipment.getShipmentNumber());
         profit.setTotalCost(cost);
         profit.setTotalIncome(income);
         profit.setProfitValue(profitValue);
