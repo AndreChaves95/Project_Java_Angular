@@ -12,12 +12,11 @@ import { CommonModule } from '@angular/common';               // Import CommonMo
         <h3>Logistics Profits</h3>
         <a class="navbar-brand" routerLink="/">Back to Main Page</a>
         <p></p>
-        <div>
-          <a class="nav-link d-inline me-2" routerLink="/shipment-profit">Shipment Profit</a>
-        </div>
-        <div>
-          <a class="nav-link d-inline" routerLink="/all-profits">Total Profit</a>
-        </div>
+        <a class="btn btn-outline-primary" routerLink="/calculate-profit">Calculate Profit</a>
+        <p></p>
+        <a class="btn btn-outline-secondary" routerLink="/shipment-profit">Shipment Profit</a>
+        <p></p>
+        <a class="btn btn-outline-secondary" routerLink="/all-profits">Total Profits</a>
       </div>
     </nav>
     <main class="container">

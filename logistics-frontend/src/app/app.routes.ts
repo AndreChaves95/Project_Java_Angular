@@ -10,6 +10,8 @@ export const routes: Routes = [
     loadComponent: () => import('./features/profit-list/profit-list.component').then(m => m.ProfitListComponent)
   },
   {
-    path: '**',
-    redirectTo: '' }
+    path: 'calculate-profit',
+    loadComponent: () => import('./features/profit-calculator/profit-calculator.component').then((m) => m.ProfitCalculatorComponent)
+  },
+  { path: '**', redirectTo: '' }
 ];
