@@ -24,23 +24,30 @@ import {ProfitDto} from "../../models/profit.model";
 })
 
 export class ProfitFormComponent {
-  form = this.fb.group({
+  form = this.formBuilder.group({
     shipmentId: [null, [Validators.required, Validators.min(1)]]
   });
 
   profit?: ProfitDto;
   error?: string;
 
-  constructor(private fb: FormBuilder, private profitService: ProfitService) {}
+  constructor(private formBuilder: FormBuilder, private profitService: ProfitService) {}
 
   submit() {
     if (this.form.invalid) return;
 
+    this.profit = undefined;  // Clear previous result
     this.error = undefined;
     const id = this.form.value.shipmentId!;
     this.profitService.getProfitByShipmentId(id).subscribe({
       next: (dto: any) => { this.profit = dto; },
-      error: (err: { error: any; message: any; }) => { this.error = err?.error || err?.message; }
+      error: (err) => {
+        if (err.status === 404) {
+          this.error = `No shipment found with ID ${id}!`;
+        } else {
+          this.error = err?.error?.message || err?.message || 'Unexpected error occurred';
+        }
+      }
     });
   }
 }
