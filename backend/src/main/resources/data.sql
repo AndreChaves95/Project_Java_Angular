@@ -10,10 +10,10 @@ ALTER TABLE cost ALTER COLUMN id RESTART WITH 1;
 ALTER TABLE income ALTER COLUMN id RESTART WITH 1;
 ALTER TABLE profit ALTER COLUMN id RESTART WITH 1;
 
-INSERT INTO shipment (id, shipment_number) VALUES
-(1, 'SHIP-001'),
-(2, 'SHIP-002'),
-(3, 'SHIP-003');
+INSERT INTO shipment (id) VALUES
+(1),
+(2),
+(3);
 
 INSERT INTO cost (shipment_id, amount, description) VALUES
 (1, 30000, 'Cars'),

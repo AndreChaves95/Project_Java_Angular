@@ -49,7 +49,6 @@ public class ProfitServiceImpl implements IProfitService {
             profit = new Profit();
             profit.setShipment(shipment);
         }
-        profit.setShipmentNumber(shipment.getShipmentNumber());
         profit.setTotalCost(cost);
         profit.setTotalIncome(income);
         profit.setProfitValue(profitValue);

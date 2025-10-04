@@ -42,7 +42,6 @@ class ProfitServiceImplIntegrationTests {
     void calculateProfitByShipmentIdShouldReturnProfit() {
         Shipment shipment = new Shipment();
         shipment.setId(4L);
-        shipment.setShipmentNumber("SHIP-0044");
         shipmentRepository.save(shipment);
 
         Cost cost = new Cost();

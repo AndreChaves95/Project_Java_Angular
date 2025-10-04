@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfitDto {
+public class ProfitInputDto {
 
     private Long shipmentId;
 
-    private BigDecimal totalCost;
+    private BigDecimal income;
 
-    private BigDecimal totalIncome;
+    private BigDecimal cost;
 
-    private BigDecimal profitValue;
+    private BigDecimal additionalCost;
 }

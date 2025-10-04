@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS shipment (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    shipment_number VARCHAR(100) NOT NULL
+    id BIGINT AUTO_INCREMENT PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS cost (
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS income (
 CREATE TABLE IF NOT EXISTS profit (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     shipment_id BIGINT NOT NULL,
-    shipment_number VARCHAR(100) NOT NULL,
     total_income DECIMAL(10,2),
     total_cost DECIMAL(10,2),
     profit_value DECIMAL(10,2),

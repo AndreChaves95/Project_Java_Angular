@@ -20,8 +20,6 @@ public class Shipment {
     @Id
     private Long id;
 
-    private String shipmentNumber;
-
     @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
     private List<Income> incomes;
 
