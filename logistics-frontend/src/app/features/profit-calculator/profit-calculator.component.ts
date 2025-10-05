@@ -37,7 +37,7 @@ export class ProfitCalculatorComponent {
 
   results: ProfitDto[] = [];
   error?: string;
-  displayedColumns = ['shipmentId', 'totalIncome', 'totalCost', 'profitValue'];
+  displayedColumns = ['totalIncome', 'totalCost', 'profitValue'];
 
   constructor(private fb: FormBuilder, private profitService: ProfitService) {}
 

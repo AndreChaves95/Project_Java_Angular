@@ -25,7 +25,7 @@ import {ProfitDto} from "../../models/profit.model";
 
 export class ProfitFormComponent {
   form = this.formBuilder.group({
-    shipmentId: [null, [Validators.required, Validators.min(1)]]
+    shipmentId: [null as number | null, [Validators.required, Validators.min(1)]] // Shipment ID must be a positive integer
   });
 
   profit?: ProfitDto;
