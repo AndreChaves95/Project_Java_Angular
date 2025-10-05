@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfitService } from '../../services/profit.service';
@@ -28,7 +28,7 @@ import { ProfitInputDto } from "../../models/profit-input.model";
   templateUrl: './profit-calculator.component.html'
 })
 export class ProfitCalculatorComponent {
-  form = this.fb.group({
+  form = this.formBuilder.group({
     shipmentId: ['', [Validators.required]],
     income: [0, [Validators.required, Validators.min(0)]],
     cost: [0, [Validators.required, Validators.min(0)]],
@@ -37,37 +37,52 @@ export class ProfitCalculatorComponent {
 
   results: ProfitDto[] = [];
   error?: string;
-  displayedColumns = ['totalIncome', 'totalCost', 'profitValue'];
+  displayedColumns = ['shipmentId', 'totalIncome', 'totalCost', 'profitValue'];
 
-  constructor(private fb: FormBuilder, private profitService: ProfitService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private profitService: ProfitService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   calculate() {
     if (this.form.invalid) return;
 
     this.error = undefined;
     const formValue = this.form.value;
+
+    // Validate that all required values are present
+    if (!formValue.shipmentId || formValue.income == 0 || formValue.cost == 0) {
+      this.error = 'Please, insert all required values.';
+      return;
+    }
+
     const input: ProfitInputDto = {
       shipmentId: parseInt(formValue.shipmentId as string),
-      income: formValue.income as number,
-      cost: formValue.cost as number,
-      additionalCost: formValue.additionalCost as number
+      income: Number(formValue.income),
+      cost: Number(formValue.cost),
+      additionalCost: Number(formValue.additionalCost)
     };
-
-    console.log('Input being sent:', input);
-    console.log('Current results array before request:', this.results);
 
     this.profitService.calculateProfit(input).subscribe({
       next: (dto) => {
-        console.log('Response received:', dto);
-        console.log('Type of response:', typeof dto);
-        console.log('Response keys:', Object.keys(dto));
-        this.results.unshift(dto);
-        console.log('Results array after adding:', this.results);
-        console.log('Results array length:', this.results.length);
+        // Always create a new array to ensure change detection
+        const existingIndex = this.results.findIndex(r => r.shipmentId === dto.shipmentId);
+        if (existingIndex >= 0) {
+          // Update existing result
+          const newResults = [...this.results];
+          newResults[existingIndex] = dto;
+          this.results = newResults;
+        } else {
+          // Add new input to the top of the list
+          this.results = [dto, ...this.results];
+        }
+        // Force change detection
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Error occurred:', err);
-        this.error = err?.error?.message || 'An error occurred';
+        this.error = err?.error?.message;
+        this.cdr.detectChanges();
       }
     });
   }
